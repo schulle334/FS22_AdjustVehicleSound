@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="77">
+    <author>schulle334</author>
+    <version>1.0.0.1</version>
+
+    <title>
+        <en>Adjust Vehicle Sound</en>
+        <de>Fahrzeuglautstärke anpassen</de>
+    </title>
+
+    <description>
+        <de><![CDATA[Mit diesem Mod kannst du die Lautstärke der Fahrzeuggeräusche sowohl für die Innen- als auch Außensicht anpassen.]]></de>
+        <en><![CDATA[This mod allows you to adjust the vehicle sound volume for both inside and outside views.]]></en>
+    </description>
+
+    <iconFilename>icon_adjustVehicleSound.dds</iconFilename>
+
+
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/AdjustVehicleSound.lua" />
+        <sourceFile filename="scripts/cameraCheck.lua" />
+        <sourceFile filename="scripts/soundControl.lua" />               
+    </extraSourceFiles>
+
+
+</modDesc>
