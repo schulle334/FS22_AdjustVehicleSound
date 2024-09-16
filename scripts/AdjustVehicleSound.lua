@@ -2,15 +2,14 @@ AdjustVehicleSound = {}
 g_adjustVehicleSound = AdjustVehicleSound
 AdjustVehicleSound.insideVolume = 1.0
 AdjustVehicleSound.outsideVolume = 0.5
-AdjustVehicleSound.exitVolume = 1.0  -- Lautstärke beim Verlassen des Fahrzeugs
+AdjustVehicleSound.exitVolume = 1.0  
 AdjustVehicleSound.lastVolume = nil
 
--- Prüft, ob die aktuelle Kamera eine Innenkamera ist
+
 function AdjustVehicleSound:isInsideCamera(camera)
     return camera.isInside or (camera.name and (string.find(camera.name, "interior") or string.find(camera.name, "inside")))
 end
 
--- Setzt die globale Fahrzeuglautstärke
 function AdjustVehicleSound:applyGlobalVehicleVolume(volume)
     if g_soundMixer then
         local volumeFloat = tonumber(volume)
@@ -24,12 +23,11 @@ function AdjustVehicleSound:applyGlobalVehicleVolume(volume)
     end
 end
 
--- Lädt die Lautstärke-Einstellungen aus einer XML-Datei
+
 function AdjustVehicleSound:loadSettings()
     local settingsPath = getUserProfileAppPath() .. "modSettings/AdjustVehicleSoundSettings.xml"
 
     if not fileExists(settingsPath) then
-        -- Erstelle AdjustVehicleSoundSettings.xml mit Standardwerten
         self:saveSettings()
         print("AdjustVehicleSoundSettings.xml wurde erstellt mit Standardwerten im modSettings-Verzeichnis.")
     else
@@ -46,7 +44,6 @@ function AdjustVehicleSound:loadSettings()
     end
 end
 
--- Speichert die Lautstärke-Einstellungen in eine XML-Datei
 function AdjustVehicleSound:saveSettings()
     local settingsPath = getUserProfileAppPath() .. "modSettings/AdjustVehicleSoundSettings.xml"
     local xmlFile = createXMLFile("SettingsXML", settingsPath, "settings")
@@ -54,7 +51,7 @@ function AdjustVehicleSound:saveSettings()
     if xmlFile then
         setXMLFloat(xmlFile, "settings.insideVolume", self.insideVolume)
         setXMLFloat(xmlFile, "settings.outsideVolume", self.outsideVolume)
-        setXMLFloat(xmlFile, "settings.exitVolume", self.exitVolume)  -- Speichern von exitVolume
+        setXMLFloat(xmlFile, "settings.exitVolume", self.exitVolume)  
         saveXMLFile(xmlFile)
         delete(xmlFile)
         print("Einstellungen in AdjustVehicleSoundSettings.xml gespeichert.")
@@ -63,14 +60,14 @@ function AdjustVehicleSound:saveSettings()
     end
 end
 
--- Lädt die Lautstärke-Einstellungen neu
+
 function AdjustVehicleSound:reloadSettings()
     print("Lade die Lautstärke-Einstellungen neu...")
     self:loadSettings()
     print("Lautstärke-Einstellungen erfolgreich neu geladen.")
 end
 
--- Update-Funktion, die regelmäßig aufgerufen wird, um die Lautstärke entsprechend der Kameraposition anzupassen
+
 function AdjustVehicleSound:update(dt)
     local vehicle = g_currentMission.controlledVehicle
     if vehicle and vehicle.spec_enterable and vehicle.spec_enterable.cameras then
@@ -78,16 +75,16 @@ function AdjustVehicleSound:update(dt)
         local volumeToSet = self:isInsideCamera(activeCamera) and self.insideVolume or self.outsideVolume
         self:applyGlobalVehicleVolume(volumeToSet)
     else
-        -- Wenn kein Fahrzeug kontrolliert wird, setze die Lautstärke auf den Exit-Volume-Wert
+
         self:applyGlobalVehicleVolume(self.exitVolume)
     end
 end
 
--- Initialisierungsfunktion beim Laden der Karte
+
 function AdjustVehicleSound:loadMap(name)
     print("AdjustVehicleSound Mod geladen")
     self:loadSettings()
-    -- Registriere Konsolenbefehl zum Neuladen der Einstellungen
+
     addConsoleCommand("reloadAdjustVehicleSoundSettings", "Lädt die Lautstärke-Einstellungen neu", "reloadSettings", self)
 end
 
