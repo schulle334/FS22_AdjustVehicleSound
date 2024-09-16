@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <modDesc descVersion="77">
     <author>schulle334</author>
-    <version>1.0.0.1</version>
+    <version>16.9.24</version>
 
     <title>
         <en>Adjust Vehicle Sound</en>
@@ -18,9 +18,7 @@
 
 
     <extraSourceFiles>
-        <sourceFile filename="scripts/AdjustVehicleSound.lua" />
-        <sourceFile filename="scripts/cameraCheck.lua" />
-        <sourceFile filename="scripts/soundControl.lua" />               
+        <sourceFile filename="scripts/AdjustVehicleSound.lua" />             
     </extraSourceFiles>
 
 
